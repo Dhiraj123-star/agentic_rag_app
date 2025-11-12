@@ -1,0 +1,8 @@
+crewai
+crewai_tools
+langchain_community
+sentence-transformers
+langchain-groq
+langchain_huggingface
+gradio
+tavily-python
