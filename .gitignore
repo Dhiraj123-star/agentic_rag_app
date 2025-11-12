@@ -1,0 +1,126 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+dist/
+build/
+eggs/
+parts/
+var/
+wheels/
+pip-wheel-metadata/
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+*.log
+*.pot
+
+# ----------------------------
+# Virtual Environments
+# ----------------------------
+venv/
+env/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# ----------------------------
+# Jupyter / IPython
+# ----------------------------
+.ipynb_checkpoints
+*.ipynb
+
+# ----------------------------
+# VS Code / Editors
+# ----------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------
+# macOS / Linux / Windows
+# ----------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# ----------------------------
+# Environment & Config
+# ----------------------------
+.env
+.env.*
+*.json
+config.yaml
+config.yml
+credentials/
+secrets/
+__config__/
+
+# ----------------------------
+# Logs & Temp
+# ----------------------------
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# ----------------------------
+# Gradio / Streamlit Cache
+# ----------------------------
+gradio_cached_examples/
+gradio_tempfiles/
+.streamlit/
+.gradio/
+
+# ----------------------------
+# Jupyter Output
+# ----------------------------
+.ipynb_checkpoints/
+*.nbconvert/
+outputs/
+reports/
+
+# ----------------------------
+# Docker
+# ----------------------------
+Dockerfile~
+docker-compose.yml~
+.dockerignore
+*.tar
+*.img
+*.pid
+
+# ----------------------------
+# Misc
+# ----------------------------
+*.sqlite3
+*.db
+*.csv
+*.tsv
+*.zip
+*.gz
+*.pdf
+*.docx
+*.pptx
+__output__/
+notebooks/
