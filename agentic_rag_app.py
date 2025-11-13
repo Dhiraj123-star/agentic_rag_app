@@ -30,4 +30,28 @@ llm= ChatOpenAI(
     max_tokens=1000,
 
 )
-print("code works!!!!")
+# tool configuration
+def setup_tools():
+    # RAG Tool
+    rag_tool = PDFSearchTool(
+        pdf="attention_is_all_you_need.pdf",
+        config=dict(
+            llm=dict(
+                provider="groq",
+                config=dict(
+                    model="llama3-8b-8192",
+            ),
+        ),
+        embedder=dict(
+            provider="huggingface",
+            config=dict(
+                model="BAAI/bge-small-en-v2",
+        ),
+        ),
+
+        )
+    )
+    # Web Search Tool
+    web_search_tool = TavilySearchResults(k=3)
+
+    return [rag_tool, web_search_tool]
