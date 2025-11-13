@@ -20,3 +20,14 @@ def download_pdf():
         response = requests.get(pdf_url)
         with open('attention_is_all_you_need.pdf', 'wb') as f:
             f.write(response.content)
+
+# LLM configuration
+llm= ChatOpenAI(
+    openai_api_base="https://api.groq.com/openai/v1",
+    openai_api_key=GROQ_API_KEY,
+    model_name ="llama3-8b-8192",
+    temperature=0.1,
+    max_tokens=1000,
+
+)
+print("code works!!!!")
