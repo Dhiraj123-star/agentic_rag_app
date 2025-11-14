@@ -221,3 +221,32 @@ def create_gradio_app():
         allow_flagging="never"
     )
     return iface
+
+# Main RAG Function
+def run_rag_pipeline(question):
+    # Download PDF if not exists
+    download_pdf()
+
+    # Setup tools
+    rag_tool, web_search_tool = setup_tools()
+    tools = (rag_tool, web_search_tool)
+
+    # Create agents
+    agents = create_agents()
+
+    # Create tasks
+    tasks = create_tasks(agents, tools)
+
+    # Create Crew
+    rag_crew = Crew(
+        agents=agents,
+        tasks=tasks,
+        verbose=True,
+    )
+
+    # Run the pipeline
+    try:
+        result = rag_crew.kickoff(inputs={"question": question})
+        return result
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
