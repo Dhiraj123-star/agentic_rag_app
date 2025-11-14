@@ -136,7 +136,7 @@ def create_agents():
     return Router_Agent, Retriever_Agent,Grader_Agent,Hallunication_Grader,Final_Answer_Agent
 
 # task definitions
-def create_agents(agents,tools):
+def create_tasks(agents,tools):
     rag_tool,web_search_tool=tools
     Router_Agent, Retriever_Agent,Grader_Agent,Hallunication_Grader,Final_Answer_Agent = agents
 
@@ -188,3 +188,16 @@ def create_agents(agents,tools):
 
     )
     return [router_task, retriever_task,grader_task,hallunication_task, answer_task]
+
+# create agents
+agents = create_agents ()
+
+# create tasks
+tasks = create_tasks(agents,tools)
+
+# Create Crew
+rag_crew = Crew(
+    agents = agents,
+    tasks= tasks,
+    verbose=True,
+)
