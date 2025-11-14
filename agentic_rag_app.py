@@ -134,3 +134,57 @@ def create_agents():
 
     )
     return Router_Agent, Retriever_Agent,Grader_Agent,Hallunication_Grader,Final_Answer_Agent
+
+# task definitions
+def create_agents(agents,tools):
+    rag_tool,web_search_tool=tools
+    Router_Agent, Retriever_Agent,Grader_Agent,Hallunication_Grader,Final_Answer_Agent = agents
+
+    router_task= Task(
+        description=(
+            "Analyse the keywords in the question {question}. "
+            "Decide whether it requires a vectorstore search or web search."
+        ),
+        expected_output= "Return 'websearch' or 'vectorstore'",
+        agent = Router_Agent,
+        tools=[router_tool],
+    )
+
+    retriever_task= Task(
+        description=(
+            "Retrieve information for the question {question}."
+            "Using either web search or vectorstore based on router task."
+        ),
+        expected_output="Provide retrieved information",
+        agent = Retriever_Agent,
+        context=[router_task],
+        tools = [rag_tool,web_search_tool],
+    )
+
+    grader_task = Task(
+        description = "Evaluate the relevance of retrieved content for the question {question}.",
+        expected_output = "Return 'yes' or 'no' for relevance",
+        agent = Grader_Agent ,
+        context = [retriever_task],
+
+    )
+
+    hallunication_task = Task(
+        description = "Verify if the retrieved answer is factually grounded.",
+        expected_output=" Return 'yes' or 'no' for factuality",
+        agent = Hallunication_Grader,
+        context = [grader_task],
+
+    )
+    answer_task= Task(
+        description = (
+            "Generate a final answer based on retrieved and verified information."
+            "Perform additional search if needed"
+        ),
+        expected_output = "Provide a clear, concise answer",
+        agent = Final_Answer_Agent,
+        context=[hallunication_task],
+        tools = [web_search_tool],
+
+    )
+    return [router_task, retriever_task,grader_task,hallunication_task, answer_task]
