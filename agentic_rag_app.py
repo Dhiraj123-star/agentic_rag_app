@@ -69,4 +69,68 @@ def router_tool(question):
         return "vectotstore"
     else:
         return "web_search"
+
+# agent definition
+
+def create_agents():
+    Router_Agent = Agent(
+        role='Router',
+        goal= "Route user question to a vectorstore or web search based on the content.",
+        backstory=(
+            "You are an expert at routing a user question to a vectorstore or web search"
+            "use the vectorstore for questions related to Retrieval-Augment Generation"
+            "Be flexible in interpreting keywords related to these topics."
+        ),
+        verbose=True,
+        allow_delegation =False,
+        llm=llm,
+
+    )
+    Retriever_Agent = Agent(
+        role="Retriever",
+        goal="Use retrieved information to answer the question",
+        backstory=(
+            "You are an assistant for question-answering tasks."
+            "Provide clear,concise answers using retrieved context."
+        ),
+        verbose =True,
+        allow_delegation=False,
+        llm=llm,
     
+    )
+    Grader_Agent = Agent(
+        role="Answer Grader",
+        goal="Filter out irrelevant retrievals",
+        backstory=(
+            "You are grader assessing the relevance of retrived documents."
+            "Evaluate if the document contains keywords related to the user question"
+        ),
+        verbose=True,
+        allow_delegation=False,
+        llm=llm,
+
+    )
+    Hallunication_Grader = Agent(
+        role ="Hallunication Grader",
+        goal="Verify answer factuality",
+        backstory=(
+            "You are responsible for ensuring the answer is grounded in facts"
+            "and directly address the user's question"
+        ),
+        verbose=True,
+        allow_delegation=False,
+        llm=llm,
+    )
+    Final_Answer_Agent = Agent(
+        role = "Final Answer Agent",
+        goal="Provide a comprehensive and accurate response",
+        backstory=(
+            "You synthesis information from various source to create"
+            "a clear,concise and informative answer to user's question."
+        ),
+        verbose = True,
+        allow_delegation=False,
+        llm=llm,
+
+    )
+    return Router_Agent, Retriever_Agent,Grader_Agent,Hallunication_Grader,Final_Answer_Agent
