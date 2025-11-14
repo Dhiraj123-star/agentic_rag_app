@@ -201,3 +201,23 @@ rag_crew = Crew(
     tasks= tasks,
     verbose=True,
 )
+
+# gradio interface
+
+def gradio_interface(query):
+    if not query:
+        return "Please enter a question."
+    return run_rag_pipeline(query)
+
+# create Gradio App
+def create_gradio_app():
+    iface = gr.Interface(
+        fn=gradio_interface,
+        inputs = gr.Textbox(label="Enter your question about AI,Language Models, or Self-Attention"),
+        outputs = gr.Textbox(label="Response"),
+        title = "Agentic RAG Demo: AI Knowledge Assistant",
+        description = "Ask questions about AI, Language Models, Transformers, and Self-Attention mechanisms. The System uses a multi-agent approach to retrieve and verify information.",
+        theme="soft",
+        allow_flagging="never"
+    )
+    return iface
