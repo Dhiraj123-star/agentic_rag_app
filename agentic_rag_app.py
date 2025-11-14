@@ -55,3 +55,18 @@ def setup_tools():
     web_search_tool = TavilySearchResults(k=3)
 
     return [rag_tool, web_search_tool]
+
+# router tool
+@tools.tool
+def router_tool(question):
+    """Router Function"""
+    keywords=['self-attention',
+            'transformer',
+            'attention',
+            'language model',
+    ] 
+    if any(keyword in question.lower() for keyword in keywords):
+        return "vectotstore"
+    else:
+        return "web_search"
+    
